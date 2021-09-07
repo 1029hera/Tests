@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.coupon.domain.WriteDAO">
+
+	<insert id="insert" flushCache="true"
+		parameterType="com.spring.coupon.domain.WriteDTO"
+		keyProperty="cid" useGeneratedKeys="true" keyColumn="cid">
+		INSERT INTO exam_coupon
+			(cid, name, kind, sno)
+		VALUES
+			(exam_coupon_seq.nextval, #{name}, #{kind}, #{sno})
+	</insert>
+
+	<select id="select" resultType="com.spring.coupon.domain.WriteDTO">
+		SELECT
+			cid,
+			name,
+			kind,
+			sno
+		FROM
+			exam_coupon
+	</select>
+	<!-- view.do -->
+	<select id="selectByCid" resultType="com.spring.coupon.domain.WriteDTO">
+		SELECT 
+			cid, name, kind, sno
+		FROM exam_coupon
+		WHERE cid=#{cid}
+	</select>
+	
+
+	<update id="update" flushCache="true" 
+		parameterType="com.spring.coupon.domain.WriteDTO">
+		UPDATE exam_coupon
+		SET name = #{a.name}, kind = #{a.kind}, sno = #{a.sno} 
+		WHERE cid = #{param1}
+	</update>
+	
+	<delete id="deleteByCid" flushCache="true">
+		DELETE FROM exam_coupon WHERE cid = #{cid}
+	</delete>
+	
+	<select id="searchByName"
+		resultType="com.spring.coupon.domain.WriteDTO">
+	</select>
+	
+	
+</mapper>
